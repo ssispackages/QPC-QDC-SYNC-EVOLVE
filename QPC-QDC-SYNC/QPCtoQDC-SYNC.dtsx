@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="40"
-  DTS:VersionGUID="{690617E7-7A32-4458-854B-CBB955127F5E}">
+  DTS:VersionBuild="41"
+  DTS:VersionGUID="{EF4DD9FD-7467-4778-A8DD-3E3DC4F6B7CA}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -2009,6 +2009,50 @@ From product
       DTS:ObjectName="Constraint 9"
       DTS:To="Package\Catalog Data Move to production" />
   </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{77762423-3E93-455C-BA2B-8E5D10AF2893}"
+      DTS:EventID="3"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{2C8CB41B-4734-43C7-94EA-3EEBF90BBE3F}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\EST OnError QPC-QDC-SYNC"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{9d3bad53-c838-443f-9539-95cfe72ffd93}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST OnError QPC-QDC-SYNC"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:PropertyExpression
+            DTS:Name="SqlStatementSource">"INSERT INTO cds_SSIS_ErrorLog VALUES('"+@[System::PackageID]+"','"+@[System::PackageName]+"','"+@[System::MachineName]+"','"+@[System::TaskName]+"',
+'"+(DT_WSTR,50) @[System::ErrorCode]+"','" + REPLACE(REPLACE(@[System::ErrorDescription],"\"",""),"'","")   +"',GETDATE())"</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{B3260B7D-4B19-4168-A759-7D2F328B7C1B}"
+              SQLTask:BypassPrepare="False"
+              SQLTask:SqlStatementSource="INSERT INTO cds_SSIS_ErrorLog VALUES('{3CF3039E-D304-4BF1-8023-36235582F18F}','Package','WINDOWS-2T1RI0S','EST OnError QPC-QDC-SYNC',&#xA;'0','',GETDATE())" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
 <!--If you manually edit this section and make a mistake, you can delete it. -->
@@ -2224,6 +2268,34 @@ From product
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 13]"
+          TopLeft="652,439.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-76.6666666666666,-22.5"
+              Start="0,0"
+              End="-76.6666666666666,-15">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-72.6666666666666,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-72.6666666666666,0"
+                    Point2="-76.6666666666666,0"
+                    Point3="-76.6666666666666,-4" />
+                  <mssgle:LineSegment
+                    End="-76.6666666666666,-15" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 14]"
           TopLeft="921.333333333333,310">
           <EdgeLayout.Curve>
@@ -2273,6 +2345,74 @@ From product
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 16]"
+          TopLeft="520.666666666667,417">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="64.3333333333334,128"
+              Start="0,0"
+              End="64.3333333333334,120.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.9078341013825" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,47.9078341013825"
+                    Point2="0,51.9078341013825"
+                    Point3="4,51.9078341013825" />
+                  <mssgle:LineSegment
+                    End="60.3333333333334,51.9078341013825" />
+                  <mssgle:CubicBezierSegment
+                    Point1="60.3333333333334,51.9078341013825"
+                    Point2="64.3333333333334,51.9078341013825"
+                    Point3="64.3333333333334,55.9078341013825" />
+                  <mssgle:LineSegment
+                    End="64.3333333333334,120.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 17]"
+          TopLeft="563.666666666667,545">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-166.666666666667,-23"
+              Start="0,0"
+              End="-166.666666666667,-15.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-5.36046511627907" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-5.36046511627907"
+                    Point2="0,-9.36046511627907"
+                    Point3="-4,-9.36046511627907" />
+                  <mssgle:LineSegment
+                    End="-162.666666666667,-9.36046511627907" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-162.666666666667,-9.36046511627907"
+                    Point2="-166.666666666667,-9.36046511627907"
+                    Point3="-166.666666666667,-13.3604651162791" />
+                  <mssgle:LineSegment
+                    End="-166.666666666667,-15.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2469,102 +2609,6 @@ From product
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 13]"
-          TopLeft="652,439.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-76.6666666666666,-22.5"
-              Start="0,0"
-              End="-76.6666666666666,-15">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-72.6666666666666,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-72.6666666666666,0"
-                    Point2="-76.6666666666666,0"
-                    Point3="-76.6666666666666,-4" />
-                  <mssgle:LineSegment
-                    End="-76.6666666666666,-15" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 16]"
-          TopLeft="520.666666666667,417">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="64.3333333333334,128"
-              Start="0,0"
-              End="64.3333333333334,120.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,47.9078341013825" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,47.9078341013825"
-                    Point2="0,51.9078341013825"
-                    Point3="4,51.9078341013825" />
-                  <mssgle:LineSegment
-                    End="60.3333333333334,51.9078341013825" />
-                  <mssgle:CubicBezierSegment
-                    Point1="60.3333333333334,51.9078341013825"
-                    Point2="64.3333333333334,51.9078341013825"
-                    Point3="64.3333333333334,55.9078341013825" />
-                  <mssgle:LineSegment
-                    End="64.3333333333334,120.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 17]"
-          TopLeft="563.666666666667,545">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-166.666666666667,-23"
-              Start="0,0"
-              End="-166.666666666667,-15.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,-5.36046511627907" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,-5.36046511627907"
-                    Point2="0,-9.36046511627907"
-                    Point3="-4,-9.36046511627907" />
-                  <mssgle:LineSegment
-                    End="-162.666666666667,-9.36046511627907" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-162.666666666667,-9.36046511627907"
-                    Point2="-166.666666666667,-9.36046511627907"
-                    Point3="-166.666666666667,-13.3604651162791" />
-                  <mssgle:LineSegment
-                    End="-166.666666666667,-15.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -2736,5 +2780,17 @@ From product
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="215,42"
+          Id="Package.EventHandlers[OnError]\EST OnError QPC-QDC-SYNC"
+          TopLeft="515,131" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
